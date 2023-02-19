@@ -40,7 +40,10 @@ def main():
     driver = webdriver.Firefox(options=options)
     driver.get('https://genius.com')
     for _ in range(SONG_LIMIT // 10 - 1): 
-        elem = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[5]/div[2]/div/div[3]/div')
+        try:
+            elem = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[5]/div[2]/div/div[3]/div')
+        except:
+            elem = driver.find_element(By.CSS_SELECTOR,"div[class='PageGridCenter-q0ues6-0 Charts__LoadMore-sc-1re0f44-0 fwSRli']")
         elem.click()
         time.sleep(5) # give 5 seconds rest between first click and finding the [see more] button again
 
